@@ -1,0 +1,309 @@
+<!-- 
+  Đề Bài: Quản lý nhân viên
+  Sự tăng giảm - biểu đồ
+
+I. Quản lý khách hàng
+- Yêu cầu lưu trữ
+1 - Thông tin khách hàng: 
+2 - Lịch sử chăm sóc + Nội dung chăm 
+
+- Yêu cầu UX
+1 - Cần biết0
+  + Xem khách hàng theo thời gian
+  + Trạng thái: thích nghe - chỉ nghe - Không học 
+  + Lộ trình học: B1 - B2 - B3
+  Số thời gian liên kết 3 tuần - 5 tuần - 
+
+  Hiển thị: 1 tháng thời gian được nghe KT - avartar - độ tuổi - trạng thái -thời gian nghe lần cuối
+  Lịch sử cập nhật trạng thái tốt xấu
+  Lịch sử nghe
+
+  Khi ấn vào có lịch sử cập nhật
+  Lịch sử chăm sóc
+
+  chế độ xem danh sách
+
+  1 bảng dòng thời gian: có bất kỳ cập nhật về trạng thái học - đã được chăm sóc gì - đến B mấy
+
+  làm chế độ danh sách trước hoặc làm cái ô chia đôi - ấn vào thì có chi tiết thông tin và cho sửa luôn như này tốt - chốt nha
+  masonry
+
+
+2 - Nhìn chế độ theo tháng - năm
+
+
+Lộ trình dạy ??? Có cho vào 
+
+  -------------------------------
+  2 - Quản lý nhân viên
+  - Yêu cầu
+
+-->
+
+<!-- 
+  1 - Làm quản lý chiên
+  2 - Danh sách quản lý ae trong khu vực (lý do ko tp, doanh số giảm)
+ -->
+
+<!-- List công việc
+  1 - Làm bảng Danh sách html css - sửa ít style
+  2 - Thêm tính năng: nhập - thêm  
+  3 - Kết nối Database
+  4 - Phát triển ứng dụng tiếp tục (xây dựng quản lý chiên trước)  ::::  loading...
+  -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      thead tr:nth-child(even) {
+        background-color: aqua;
+      }
+
+      td,
+      th {
+        border: 1px solid #f5f8ff;
+        text-align: left;
+        padding: 12px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f5f8ff;
+      }
+
+      /* Bổ sung */
+      .a-table {
+        /* width: 80%; */
+        margin: 0 auto;
+        margin-top: 40px;
+      }
+
+      /* Xử lý tối ưu */
+      [placeholder]:empty::before {
+        content: attr(placeholder);
+        color: rgb(151, 151, 151);
+      }
+
+      [placeholder]:empty:focus::before {
+        content: '';
+      }
+
+      /* 
+          1 - Style bảng 
+          2- Xây dựng tính năng add data
+          
+          */
+    </style>
+  </head>
+  <body>
+    <div>
+      <table class="a-table">
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Contact</th>
+            <th>Country</th>
+          </tr>
+          <tr class="tr-data">
+            <td id="th-1" contenteditable="true" placeholder="Nhập tên"></td>
+            <td id="th-2" contenteditable="true">Gửi đi</td>
+            <td id="th-3" contenteditable="true">đi đâu</td>
+          </tr>
+        </thead>
+        <tbody id="data">
+          <tr>
+            <td>Alfreds Futterkiste</td>
+            <td>Maria Anders</td>
+            <td>Germany</td>
+          </tr>
+          <tr class="data-expand">
+            <td class="data-content" colspan="3">
+              <!-- Component date -->
+              <div class="wp-box">
+                <div class="wp-date">
+                  <div class="month">Tháng 1</div>
+                  <div class="date-day">
+                    <div class="day">1</div>
+                    <div class="day">2</div>
+                    <div class="day">3</div>
+                    <div class="day">4</div>
+                    <div class="day">5</div>
+                    <div class="day">6</div>
+                    <div class="day">7</div>
+                    <div class="day">8</div>
+                    <div class="day">9</div>
+                    <div class="day">10</div>
+                    <div class="day">11</div>
+                    <div class="day">12</div>
+                    <div class="day">13</div>
+                    <div class="day">14</div>
+                    <div class="day">15</div>
+                    <div class="day">16</div>
+                    <div class="day">17</div>
+                    <div class="day">18</div>
+                    <div class="day">19</div>
+                    <div class="day">20</div>
+                    <div class="day">21</div>
+                    <div class="day">22</div>
+                    <div class="day">23</div>
+                    <div class="day">24</div>
+                    <div class="day">25</div>
+                    <div class="day">26</div>
+                    <div class="day">27</div>
+                    <div class="day">28</div>
+                    <div class="day">29</div>
+                    <div class="day">30</div>
+
+                    <div class="day">1</div>
+                    <div class="day">2</div>
+                    <div class="day">3</div>
+                    <div class="day">4</div>
+                    <div class="day">5</div>
+                    <div class="day">6</div>
+                    <div class="day">7</div>
+                    <div class="day">8</div>
+                    <div class="day">9</div>
+                    <div class="day">10</div>
+                    <div class="day">11</div>
+                    <div class="day">12</div>
+                    <div class="day">13</div>
+                    <div class="day">14</div>
+                    <div class="day">15</div>
+                    <div class="day">16</div>
+                    <div class="day">17</div>
+                    <div class="day">18</div>
+                    <div class="day">19</div>
+                    <div class="day">20</div>
+                    <div class="day">21</div>
+                    <div class="day">22</div>
+                    <div class="day">23</div>
+                    <div class="day">24</div>
+                    <div class="day">25</div>
+                    <div class="day">26</div>
+                    <div class="day">27</div>
+                    <div class="day">28</div>
+                    <div class="day">29</div>
+                    <div class="day">30</div>
+                  </div>
+                  <div class="date-data">
+                    <div class="day">10</div>
+                    <div class="day">20</div>
+                    <div class="day">10</div>
+                    <div class="day">20</div>
+                  </div>
+                </div>
+              </div>
+              <!-- Style component -->
+              <style>
+                .wp-date {
+                  float: left;
+                }
+                .data-content {
+                  /* overflow-x: auto; */
+                  max-width: 1px;
+                }
+
+                .wp-box {
+                  display: block;
+                  width: 100%;
+                  overflow-x: auto;
+                  float: left;
+                }
+
+                .wp-box::-webkit-scrollbar {
+                  display: none;
+                }
+
+                .date-top {
+                  border-bottom: 1px solid #d3d1cb;
+                }
+
+                .date-day {
+                  border-bottom: 1px solid #d3d1cb;
+                }
+
+                .date-data {
+                  height: 73px;
+                }
+
+                .date-day,
+                .date-data {
+                  display: inline-flex;
+                }
+
+                .day {
+                  width: 30px;
+                }
+              </style>
+            </td>
+          </tr>
+          <tr>
+            <td>Centro comercial Moctezuma</td>
+            <td>Francisco Chang</td>
+            <td>Mexico</td>
+          </tr>
+          <tr>
+            <td>Ernst Handel</td>
+            <td>Roland Mendel</td>
+            <td>Austria</td>
+          </tr>
+          <tr>
+            <td>Island Trading</td>
+            <td>Helen Bennett</td>
+            <td>UK</td>
+          </tr>
+          <tr>
+            <td>Laughing Bacchus Winecellars</td>
+            <td>Yoshi Tannamuri</td>
+            <td>Canada</td>
+          </tr>
+          <tr>
+            <td>Magazzini Alimentari Riuniti</td>
+            <td>Giovanni Rovelli</td>
+            <td>Italy</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button onclick="sendata()">Gửi đi</button>
+    </div>
+
+    <script>
+      const database = supabase.createClient(
+        'https://hylycicgccjwkizxbjlc.supabase.co',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh5bHljaWNnY2Nqd2tpenhiamxjIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjYyMjYwNTMsImV4cCI6MTk4MTgwMjA1M30.MYZW6z_XGl92pE3dZIav9YBZA9RlVXO4Up0aRRFap90'
+      );
+
+      async function sendata() {
+        const { data, error } = await database.from('info').select('name');
+
+        console.log(data);
+
+        // get data
+        let th1 = document.getElementById('th-1').innerText;
+        let th2 = document.getElementById('th-2').innerText;
+        let th3 = document.getElementById('th-3').innerText;
+        alert(th1 + th2 + th3);
+
+        let table = document.getElementById('data').innerHTML;
+
+        document.getElementById('data').innerHTML =
+          `<tr>
+                  <td>${th1}</td>
+                  <td>${th2}</td>
+                  <td>${th3}</td>
+                </tr>` + table;
+      }
+    </script>
+  </body>
+</html>
