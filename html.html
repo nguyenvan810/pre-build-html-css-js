@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>CodeMirror Example</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/codemirror.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/theme/darcula.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.63.0/theme/monokai.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.63.0/theme/material.css">
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/codemirror.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/codemirror.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/mode/xml/xml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/mode/javascript/javascript.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/mode/css/css.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/mode/htmlmixed/htmlmixed.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/addon/display/autorefresh.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <style>
+    .CodeMirror {
+      border: 1px solid black;
+      font-size: 14px;
+    }
+  </style>
+  <!-- Nhúng Typed.js từ CDN -->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
+
+
+
+</head>
+<body>
+    <div class="type"></div>
+  <h1>CodeMirror Example</h1>
+  <textarea id="code" name="code">
+    
+  </textarea>
+  <script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+      mode: "htmlmixed",
+      lineNumbers: true,
+      theme: "material",
+      htmlMode: true,
+      extraKeys: {"Ctrl-Space": "autocomplete"},
+    });
+
+    function animateTyping(text) {
+        var i = 0;
+        var intervalId = setInterval(function () {
+          if (i >= text.length) {
+            clearInterval(intervalId);
+          } else {
+            editor.replaceRange(text.charAt(i), editor.getCursor());
+            i++;
+            editor.setCursor(editor.getCursor());
+            editor.scrollIntoView({ line: Infinity, ch: Infinity }, 100);
+          }
+        }, 5);
+      }
+      const message1 = `<head>
+            <title>My Page</title>
+            <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f1f1f1;
+            }
+            </style>
+        </head>
+        <body>
+            <p></p>
+            <h1>Welcome to my page</h1>
+            <a href="http://" target="_blank" rel="noopener noreferrer"></a>
+            <script>
+                function showMessage() {
+                    alert("Hello, world!");
+                }
+                showMessage();
+
+                var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+                mode: "htmlmixed",
+                lineNumbers: true,
+                theme: "monokai",
+                htmlMode: true,
+                extraKeys: {"Ctrl-Space": "autocomplete"}
+                }); showMessage();
+
+                var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+                mode: "htmlmixed",
+                lineNumbers: true,
+                theme: "monokai",
+                htmlMode: true,
+                extraKeys: {"Ctrl-Space": "autocomplete"}
+                });
+            </\script>
+        </body>
+      `;
+
+    const newStr = message1.replace(/<\/script>/g, "</\script>");
+    animateTyping(newStr);
+  </script>
+</body>
+</html>
